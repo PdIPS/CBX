@@ -72,6 +72,6 @@ In addition, recent work [@riedl2023gradient] establishes a connection of CBO to
 
 # Acknowledgements
 
-We thank the Lorentz Center in Leiden for their kind hospitality during the workshop Purpose-driven particle systems in Spring 2023, where this work was initiated.
+We thank the Lorentz Center in Leiden for their kind hospitality during the workshop "Purpose-driven particle systems" in Spring 2023, where this work was initiated.
 
 # References
