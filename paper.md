@@ -12,6 +12,9 @@ authors:
   - name: Konstantin Riedl
     orcid: 0000-0002-2206-4334
     affiliation: "2, 3"
+  - name: Claudia Totzeck
+    ordic: 0000-0001-6283-7154
+    affiliation: 4  
 affiliations:
  - name: Friedrich-Alexander-Universität Erlangen-Nürnberg
    index: 1
@@ -19,7 +22,9 @@ affiliations:
    index: 2
  - name: Munich Center for Machine Learning
    index: 3
-date: 08 October 2023
+ - name: University of Wuppertal
+   index: 4 
+date: 09 October 2023
 bibliography: paper.bib
 ---
 
@@ -67,6 +72,6 @@ In addition, recent work [@riedl2023gradient] establishes a connection of CBO to
 
 # Acknowledgements
 
-We thank the Lorentz Center in Leiden for their kind hospitality during the workshop "Purpose-driven particle systems" in Spring 2023, where this work was initiated.
+We thank the Lorentz Center in Leiden for their kind hospitality during the workshop Purpose-driven particle systems in Spring 2023, where this work was initiated.
 
 # References
