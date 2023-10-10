@@ -13,8 +13,11 @@ authors:
     orcid: 0000-0002-2206-4334
     affiliation: "2, 3"
   - name: Claudia Totzeck
-    ordic: 0000-0001-6283-7154
-    affiliation: 4  
+    orcid: 0000-0001-6283-7154
+    affiliation: 4
+  - name: Alethea Barbaro
+    orcid: 0000-0001-9856-2818
+    affiliation: 5  
 affiliations:
  - name: Friedrich-Alexander-Universität Erlangen-Nürnberg
    index: 1
@@ -23,7 +26,9 @@ affiliations:
  - name: Munich Center for Machine Learning
    index: 3
  - name: University of Wuppertal
-   index: 4 
+   index: 4
+ - name: Technische Universiteit Delft
+   index: 5  
 date: 09 October 2023
 bibliography: paper.bib
 ---
