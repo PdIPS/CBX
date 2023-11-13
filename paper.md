@@ -35,23 +35,23 @@ bibliography: paper.bib
 
 # Summary
 
-Solving real-world problems across diverse fields such as engineering, finance, machine learning, and scientific research often requires solving a global optimization problem of the form
+Addressing real-world challenges across diverse domains, including engineering, finance, machine learning, and scientific research often requires solving a global optimization problem of the form
 
 $$
-\min_{x\in\mathcal{X}} f(x),
+\min_{x\in\mathcal{X}} f(x).
 $$
 
-where $f:\mathcal{X}\to\mathbb{R}$ is some objective function over the state space $\mathcal{X}$. With rising model complexity, solution spaces become convoluted and call for more refined algorithms. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative free methods are more appropriate. One reason for this, might be that the gradient of $f$ might be unavailable or difficult to evaluate. Another one might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods. 
+Here, $f:\mathcal{X}\to\mathbb{R}$ is some objective function over the state space $\mathcal{X}$. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative free methods are more appropriate. This can be attributed to the unavailability or difficulty in evaluating the gradient of $f$. Additionally, it might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods. 
 
-While there are many techniques for derivative-free optimization, like random or pattern search [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], Bayesian optimization [@movckus1975bayesian] or simulated annealing [@henderson2003theory], we focus on particle based methods, namely on consensus-based optimization (CBO) as proposed in [@pinnau2017consensus]. For an ensemble of particles $x=(x^1,\ldots, x^N)\in \mathcal{X}^N$ the update of the $i$ th particle is given as follows:
+Numerous techniques exist for derivative-free optimization, such as random or pattern search [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], Bayesian optimization [@movckus1975bayesian] or simulated annealing [@henderson2003theory]. However, we focus on particle based methods, specifically on consensus-based optimization (CBO) as proposed in [@pinnau2017consensus]. For an ensemble of particles $x=(x^1,\ldots, x^N)\in \mathcal{X}^N$ the update of the $i$ the particle is given as follows:
 
 $$
 x^i \gets x^i + dt\ \lambda\ (x^i - c_\alpha(x)) + \sigma\ |x^i - c(x)|\ \xi^i,
 $$
 
-with parameters $dt, \lambda,\alpha, \sigma >0$, consensus point $c(x)$ and noise $\xi^i \sim \mathcal{N}(0,1)$. 
+where $dt, \lambda, \alpha, \sigma > 0$ are parameters, $c(x)$ is the consensus point, and $\xi^i \sim \mathcal{N}(0,1)$ represents noise.
 
-In this paper we present CBXpy and CBX.jl which provide Python and Julia implementations, respectively, for consensus-based interacting particle methods. The zoo of different variants of CBO, such as consensus-based sampling (CBS) [@carrillo2022consensus] coined the acronym CBX. The Python and Julia implementations were developed in parallel, in order to provide a framework for researchers more familiar with either language. While we focused on having a similar API and core functionality in both packages, we took advantage of the strengths of each language and wrote idiomatic code.
+In this paper we introduce CBXpy and CBX.jl, providing Python and Julia implementations, respectively, for consensus-based interacting particle methods. The zoo of different variants of CBO, such as consensus-based sampling (CBS) [@carrillo2022consensus] coined the acronym CBX. The Python and Julia implementations were developed concurrently to offer a framework accessible for researchers more familiar with either language. While ensuring a similar API and core functionality in both packages, we leveraged strengths of each language and wrote idiomatic code.
 
 ![Visualization of a CBO run for the Ackley function [@ackley2012connectionist].](JOSS.png){ width=50% }
 
@@ -106,9 +106,10 @@ Most of the code uses basic Python functionality, where the ensemble $x$ is mode
 A simple approach for achieving parallelization, is done by running multiple instances of a single dynamic in parallel. Additionally, in the python version one has the option of low-level parallelization exploiting array operations in 
 ```numpy```. An ensemble has the dimension $M\times N\times d$, where $M$ is the number of runs, $N$ is the number of particles and $d$ is the dimension of the state space.
 
-The code is licensed under the MIT license.
+The package is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via ```pip```, since it is released on PyPI. It is licensed under the MIT license. A documentation is available [online](https://pdips.github.io/CBXpy/).
 
 # Features of CBX.jl
+![Logo of CBXPy](CBXjl.png){ width=50% }
 
 
 # Acknowledgements
