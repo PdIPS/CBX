@@ -41,7 +41,7 @@ $$
 \min_{x\in\mathcal{X}} f(x),
 $$
 
-where $f:\mathcal{X}\to\R$ is some objective function over the state space $\mathcal{X}$. With rising model complexity, solution spaces become convoluted and call for more refined algorithms. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative free methods are more appropriate. One reason for this, might be that the gradient of $f$ might be unavailable or difficult to evaluate. Another one might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods. 
+where $f:\mathcal{X}\to\mathbb{R}$ is some objective function over the state space $\mathcal{X}$. With rising model complexity, solution spaces become convoluted and call for more refined algorithms. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative free methods are more appropriate. One reason for this, might be that the gradient of $f$ might be unavailable or difficult to evaluate. Another one might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods. 
 
 While there are many techniques for derivative-free optimization, like random or pattern search [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], Bayesian optimization [@movckus1975bayesian] or simulated annealing [@henderson2003theory], we focus on particle based methods, namely on consensus-based optimization (CBO) as proposed in [@pinnau2017consensus]. For an ensemble of particles $x=(x^1,\ldots, x^N)\in \mathcal{X}^N$ the update of the $i$ th particle is given as follows:
 
@@ -112,6 +112,8 @@ The code is licensed under the MIT license.
 
 
 # Acknowledgements
+
+TR acknowledges support from DESY (Hamburg, Germany), a member of the Helmholtz Association HGF.
 
 We thank the Lorentz Center in Leiden for their kind hospitality during the workshop "Purpose-driven particle systems" in Spring 2023, where this work was initiated.
 
