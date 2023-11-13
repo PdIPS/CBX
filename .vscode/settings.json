@@ -6,5 +6,12 @@
         "markdown",
         "latex",
         "plaintext"
+    ],
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file",
+            "pattern": "paper.md"
+        }
     ]
 }
