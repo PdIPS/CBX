@@ -49,7 +49,7 @@ where $dt, \alpha, \lambda, \sigma > 0$ are user-specified parameters and $\xi^i
 
 In this paper, we introduce CBXpy and CBX.jl, providing Python and Julia implementations, respectively, for consensus-based interacting particle methods. The zoo of different variants of CBO, such as consensus-based sampling (CBS) [@carrillo2022consensus] coined the acronym CBX. The Python and Julia implementations were developed concurrently to offer a framework accessible to researchers more familiar with either language. While ensuring a similar API and core functionality in both packages, we leveraged strengths of each language and wrote idiomatic code.
 
-![Visualization of a CBO run for the Ackley function [@ackley2012connectionist].](JOSS.png){ width=50% }
+![Visualization of a CBO run for the Ackley function [@ackley2012connectionist].](JOSS.png){ width=100% }
 
 # Statement of need
 
