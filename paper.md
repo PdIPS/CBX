@@ -37,7 +37,7 @@ bibliography: paper.bib
 
 Addressing real-world challenges across diverse domains, including engineering, finance, machine learning, and scientific research often requires to solve a global optimization problem of the form
 $$
-x^* = \argmin_{x\in\mathcal{X}} f(x),
+x^* = \mathrm{argmin}_{x\in\mathcal{X}} f(x),
 $$
 where, $f:\mathcal{X}\to\mathbb{R}$ is some objective function over the state space $\mathcal{X}$. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative-free methods are more appropriate. This can be attributed to the unavailability or difficulty in evaluating the gradient of $f$. Additionally, it might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods. 
 
