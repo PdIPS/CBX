@@ -45,7 +45,7 @@ Numerous techniques exist for derivative-free optimization, such as random or pa
 $$
 x^i \gets x^i - dt\ \lambda\ (x^i - c_\alpha(x)) + \sqrt{dt}\ \sigma\ |x^i - c_\alpha(x)|\ \xi^i,
 $$
-where $dt, \alpha, \lambda, \sigma > 0$ are user-specified parameters and $\xi^i \sim \mathcal{N}(0,\mathrm{Id})$ are independent, identically distributed Gaussian random vectors representing noise. Moreover, $c_\alpha(x)$ denotes the consensus point, which is computed as a weighted average of the particles $x$ and serves as a momentaneous guess for the global minimizer~$x^*$.
+where $dt, \alpha, \lambda, \sigma > 0$ are user-specified parameters and $\xi^i \sim \mathcal{N}(0,\mathrm{Id})$ are independent, identically distributed Gaussian random vectors representing noise. Moreover, $c_\alpha(x)$ denotes the consensus point, which is computed as a weighted average of the particles $x$ and serves as a momentaneous guess for the global minimizer $x^*$.
 
 In this paper, we introduce CBXpy and CBX.jl, providing Python and Julia implementations, respectively, for consensus-based interacting particle methods. The zoo of different variants of CBO, such as consensus-based sampling (CBS) [@carrillo2022consensus] coined the acronym CBX. The Python and Julia implementations were developed concurrently to offer a framework accessible to researchers more familiar with either language. While ensuring a similar API and core functionality in both packages, we leveraged strengths of each language and wrote idiomatic code.
 
@@ -53,7 +53,7 @@ In this paper, we introduce CBXpy and CBX.jl, providing Python and Julia impleme
 
 # Statement of need
 
-As a particle method, CBO is conceptually comparable to biologically and physically inspired methods such as particle-swarm optimization (PSO) [@kennedy1995particle], simulated annealing (SA) [@henderson2003theory] or several other heuristics [@mohan2012survey;@karaboga2014comprehensive;@yang2009firefly;@bayraktar2013wind]. However, compared to these methods, CBO was designed to be amenable to a rigorous theoretical convergence analysis on the mean-field level [@carrillo2018analytical;@carrillo2021consensus;@fornasier2021consensus;@fornasier2021convergence;riedl2022leveraging;fornasier2023consensus]. 
+As a particle method, CBO is conceptually comparable to biologically and physically inspired methods such as particle-swarm optimization (PSO) [@kennedy1995particle], simulated annealing (SA) [@henderson2003theory] or several other heuristics [@mohan2012survey;@karaboga2014comprehensive;@yang2009firefly;@bayraktar2013wind]. However, compared to these methods, CBO was designed to be amenable to a rigorous theoretical convergence analysis on the mean-field level [@carrillo2018analytical;@carrillo2021consensus;@fornasier2021consensus;@fornasier2021convergence;@riedl2022leveraging;@fornasier2023consensus]. 
 
 For Python, we refer to [@duan2023pypop7] and [@scikitopt] for a collection of various derivative-free optimization strategies. A very recent implementation of Bayesian optimization is described in [@Kim2023]. PSO and SA implementations are already available in [@miranda2018pyswarms;@scikitopt;@deapJMLR2012;@pagmo2017], which are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. Furthermore, we intend to provide a lightweight and direct implementation of CBO methods, which is easy to understand and to modify. The first publicly available Python packages implementing CBO-type algorithms were given by some of the authors together with collaborators in [@Igor_CBOinPython], where CBO as in [@pinnau2017consensus] is implemented, as well as in [@Roith_polarcbo], where so-called polarized CBO [@bungert2022polarized] is implemented. The current Python package CBXpy is a complete rewrite of the latter implementation.
 
@@ -71,9 +71,11 @@ CBO methods use a finite number of agents $x=(x^1,\dots,x^N)$ to explore the dom
 $$
 dx^i_t = -\lambda\ \underbrace{(x^i_t-c_\alpha(x_t))\,dt}_{\text{consensus drift}} + \sigma\ \underbrace{D(x^i_t-c_\alpha(x_t))\,dB^i_t}_{\text{scaled diffusion}},
 $$
-where $\alpha,\lambda,\sigma$ are parameters as before and $((B^i_t)_{t\geq0})_{i=1,\dots,N}$ denote independent standard Brownian motions. Global information about the objective function is encoded in the consensus point $c_\alpha$, which is computed as
+where $\alpha,\lambda,\sigma$ are parameters as before and $((B^i_t)_{t\geq0})_{i=1,\dots,N}$ denote independent standard Brownian motions.
+Here, $D$ encodes the noise model with typical choices being isotropic noise [@pinnau2017consensus], i.e., $D(\,\cdot\,) = \|\,\cdot\,\|_2$, anisotropic noise [@carrillo2021consensus], i.e., $D(\,\cdot\,) = \operatorname*{diag}(\,\cdot\,)$ or the sampling noise from [@carrillo2022consensus].
+Global information about the objective function is encoded in the consensus point $c_\alpha$, which is computed as
 $$
-c_\alpha(x_t) = \frac{1}{\sum_{i=1}^N \omega_\alpha(x^i_t)} \sum_{i=1}^N x^i_t\ \omega_\alpha(x^i_t), \quad\text{ with }\quad \omega_\alpha(\,\cdots\,) = \mathrm{exp}(-\alpha f(\,\cdots\,)).
+c_\alpha(x_t) = \frac{1}{\sum_{i=1}^N \omega_\alpha(x^i_t)} \sum_{i=1}^N x^i_t\ \omega_\alpha(x^i_t), \quad\text{ with }\quad \omega_\alpha(\,\cdot\,) = \mathrm{exp}(-\alpha f(\,\cdot\,)).
 $$
 Each particle is driven by a drift toward the consensus (confinement) and subject to a scaled diffusion (exploration). The scaling factor of the diffusion is proportional to the distance of the particle from the consensus point. Hence, whenever a particle's position and the location of the weighted mean coincide, the particle stops moving. Concerning the analysis of the methods, the main challenge is to balance the drift and diffusion term in such a way that all particles converge to the consensus point, which is located at the globally best position of the state space. If the drift is too strong, the convergence may happen prematurely. On the other hand, if the diffusion is too strong, there may be no convergence at all. The choice of the weight function defining the mean is motivated by the Laplace principle [@dembo1998large], which ensures that the consensus point converges to the position of the particle with best objective value (assuming that this particle is unique). From a computational perspective, the method is attractive as the particle interactions scale linearly with the number of particles.
 
@@ -82,7 +84,7 @@ The implemented CBO code originates from a simple Euler-Maruyama time discretiza
 A convergence statement therefore is available in [@fornasier2021consensus;@fornasier2021convergence].
 Similar analysis techniques further allowed to obtain theoretical convergence guarantees for a variety of CBO variants [@bungert2022polarized;@riedl2022leveraging;@fornasier2023consensus] as well as PSO [@qiu2022PSOconvergence].
 
-As of now, CBX methods have been deployed in several different settings and for different purposes, such as for solving constrained optimizations [@fornasier2020consensus_sphere_convergence;@borghi2021constrained], multi-objective optimizations [@borghi2022adaptive;@klamroth2022consensus], saddle point problems [@huang2022consensus], federated learning tasks [@carrillo2023fedcbo], adversarial training [] or for sampling [@carrillo2022consensus].
+As of now, CBX methods have been deployed in several different settings and for different purposes, such as for solving constrained optimizations [@fornasier2020consensus_sphere_convergence;@borghi2021constrained], multi-objective optimizations [@borghi2022adaptive;@klamroth2022consensus], saddle point problems [@huang2022consensus], federated learning tasks [@carrillo2023fedcbo], adversarial training [], in the setting of uncertainty quantification [@althaus2023consensus] or for sampling [@carrillo2022consensus].
 In addition, recent work [@riedl2023gradient] establishes a connection of CBO to stochastic gradient descent-type methods, suggesting a more fundamental connection of theoretical interest between derivative-free and gradient-based methods.
 
 # Features of CBXPy
