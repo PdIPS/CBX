@@ -67,7 +67,7 @@ We summarize the motivation and main features of the packages in what follows.
 
 # Mathematical background
 
-CBO methods use a finite number of agents $x=(x^1,\dots,x^N)$ to explore the domain and to form a global consensus about the location of the minimizer $x^*$ as time passes. They are described through a system of stochastic differential equations (SDEs), expressed in Itô's form as
+CBO methods use a finite number of agents $x=(x^1,\dots,x^N)$ to explore the domain and to form a global consensus about the location of the minimizer $x^*$ as time passes. They are described through a system of stochastic differential equations (SDEs), expressed in Ito's formula as
 $$
 dx^i_t = -\lambda\ \underbrace{(x^i_t-c_\alpha(x_t))\,dt}_{\text{consensus drift}} + \sigma\ \underbrace{D(x^i_t-c_\alpha(x_t))\,dB^i_t}_{\text{scaled diffusion}},
 $$
