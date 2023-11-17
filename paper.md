@@ -17,7 +17,10 @@ authors:
     affiliation: 4
   - name: Alethea Barbaro
     orcid: 0000-0001-9856-2818
-    affiliation: 5  
+    affiliation: 5
+  - name: Susana N. Gomes
+    orcid: 0000-0002-8731-367X
+    affiliation: 6
 affiliations:
  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY
    index: 1
@@ -28,7 +31,9 @@ affiliations:
  - name: University of Wuppertal
    index: 4
  - name: Technische Universiteit Delft
-   index: 5  
+   index: 5
+ - name: Mathematics Institute, University of Warwick
+   index: 6
 date: 22 November, 2023
 bibliography: paper.bib
 ---
