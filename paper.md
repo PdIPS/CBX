@@ -84,7 +84,7 @@ The implemented CBO code originates from a simple Euler-Maruyama time discretiza
 A convergence statement therefore is available in [@fornasier2021consensus;@fornasier2021convergence].
 Similar analysis techniques further allowed to obtain theoretical convergence guarantees for a variety of CBO variants [@bungert2022polarized;@riedl2022leveraging;@fornasier2023consensus] as well as PSO [@qiu2022PSOconvergence].
 
-As of now, CBX methods have been deployed in several different settings and for different purposes, such as for solving constrained optimizations [@fornasier2020consensus_sphere_convergence;@borghi2021constrained], multi-objective optimizations [@borghi2022adaptive;@klamroth2022consensus], saddle point problems [@huang2022consensus], federated learning tasks [@carrillo2023fedcbo], adversarial training [], in the setting of uncertainty quantification [@althaus2023consensus] or for sampling [@carrillo2022consensus].
+As of now, CBX methods have been deployed in several different settings and for different purposes, such as for solving constrained optimization problems [@fornasier2020consensus_sphere_convergence;@borghi2021constrained], multi-objective optimizations [@borghi2022adaptive;@klamroth2022consensus], saddle point problems [@huang2022consensus], federated learning tasks [@carrillo2023fedcbo], in the setting of uncertainty quantification [@althaus2023consensus] or for sampling [@carrillo2022consensus].
 In addition, recent work [@riedl2023gradient] establishes a connection of CBO to stochastic gradient descent-type methods, suggesting a more fundamental connection of theoretical interest between derivative-free and gradient-based methods.
 
 # Features of CBXPy
