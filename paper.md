@@ -22,7 +22,7 @@ authors:
     orcid: 0000-0002-8731-367X
     affiliation: 6
 affiliations:
- - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY
+ - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
    index: 1
  - name: Technical University of Munich
    index: 2
@@ -108,7 +108,7 @@ Most of the code uses basic Python functionality, where the ensemble $x$ is mode
 A simple approach for achieving parallelization is done by running multiple instances of a single dynamic in parallel. Additionally, in the python version one has the option of low-level parallelization exploiting array operations in 
 ```numpy```. An ensemble has the dimension $M\times N\times d$, where $M$ is the number of runs, $N$ the number of particles and $d$ the dimension of the state space.
 
-The package is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via ```pip```, since it is released on PyPI. It is licensed under the MIT license. A documentation is available [online](https://pdips.github.io/CBXpy/).
+The package is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via ```pip```. It is licensed under the MIT license. A documentation is available [online](https://pdips.github.io/CBXpy/).
 
 # Features of CBX.jl
 ![Logo of CBX.ji](CBXjl.png){ width=50% }
