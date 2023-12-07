@@ -21,6 +21,9 @@ authors:
   - name: Susana N. Gomes
     orcid: 0000-0002-8731-367X
     affiliation: 6
+  - name: Urbain Vaes
+    orcid: 0000-0002-7629-7184
+    affiliation: "7, 8"
 affiliations:
  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
    index: 1
@@ -34,6 +37,10 @@ affiliations:
    index: 5
  - name: Mathematics Institute, University of Warwick
    index: 6
+ - name: Inria Paris
+   index: 7
+ - name: École des Ponts
+   index: 8
 date: 22 November, 2023
 bibliography: paper.bib
 ---
