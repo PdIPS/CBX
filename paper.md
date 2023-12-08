@@ -37,7 +37,7 @@ affiliations:
    index: 5
  - name: Mathematics Institute, University of Warwick
    index: 6
- - name: Inria Paris
+ - name: MATHERIALS team, Inria Paris
    index: 7
  - name: École des Ponts
    index: 8
@@ -51,7 +51,7 @@ Addressing real-world challenges across diverse domains, including engineering, 
 $$
 x^* = \operatorname*{argmin}_{x\in\mathcal{X}} f(x),
 $$
-where, $f\colon\mathcal{X}\to\mathbb{R}$ is some objective function over the state space $\mathcal{X}$. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative-free methods are more appropriate. This can be attributed to the unavailability or difficulty in evaluating the gradient of $f$. Additionally, it might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods. 
+where, $f\colon\mathcal{X}\to\mathbb{R}$ is some objective function over the state space $\mathcal{X}$. While in many cases, gradient-based methods achieve state-of-the-art performance, there are various scenarios where so-called derivative-free methods are more appropriate. This can be attributed to the unavailability or difficulty in evaluating the gradient of $f$. Additionally, it might be that $f$ is non-smooth or non-convex, which also hinders the applicability of gradient-based methods.
 
 Numerous techniques exist for derivative-free optimization, such as random or pattern search [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], Bayesian optimization [@movckus1975bayesian] or simulated annealing [@henderson2003theory]. However, we focus on particle-based methods, specifically on consensus-based optimization (CBO) as proposed in [@pinnau2017consensus]. For an ensemble of $N$ particles $x=(x^1,\ldots, x^N)\in \mathcal{X}^N$, the update of the $i$th particle is given by
 $$
@@ -65,7 +65,7 @@ In this paper, we introduce CBXpy and CBX.jl, providing Python and Julia impleme
 
 # Statement of need
 
-As a particle method, CBO is conceptually comparable to biologically and physically inspired methods such as particle-swarm optimization (PSO) [@kennedy1995particle], simulated annealing (SA) [@henderson2003theory] or several other heuristics [@mohan2012survey;@karaboga2014comprehensive;@yang2009firefly;@bayraktar2013wind]. However, compared to these methods, CBO was designed to be amenable to a rigorous theoretical convergence analysis on the mean-field level [@carrillo2018analytical;@carrillo2021consensus;@fornasier2021consensus;@fornasier2021convergence;@riedl2022leveraging;@fornasier2023consensus]. 
+As a particle method, CBO is conceptually comparable to biologically and physically inspired methods such as particle-swarm optimization (PSO) [@kennedy1995particle], simulated annealing (SA) [@henderson2003theory] or several other heuristics [@mohan2012survey;@karaboga2014comprehensive;@yang2009firefly;@bayraktar2013wind]. However, compared to these methods, CBO was designed to be amenable to a rigorous theoretical convergence analysis on the mean-field level [@carrillo2018analytical;@carrillo2021consensus;@fornasier2021consensus;@fornasier2021convergence;@riedl2022leveraging;@fornasier2023consensus].
 
 For Python, we refer to [@duan2023pypop7] and [@scikitopt] for a collection of various derivative-free optimization strategies. A very recent implementation of Bayesian optimization is described in [@Kim2023]. PSO and SA implementations are already available in [@miranda2018pyswarms;@scikitopt;@deapJMLR2012;@pagmo2017], which are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. Furthermore, we intend to provide a lightweight and direct implementation of CBO methods, which is easy to understand and to modify. The first publicly available Python packages implementing CBO-type algorithms were given by some of the authors together with collaborators in [@Igor_CBOinPython], where CBO as in [@pinnau2017consensus] is implemented, as well as in [@Roith_polarcbo], where so-called polarized CBO [@bungert2022polarized] is implemented. The current Python package CBXpy is a complete rewrite of the latter implementation.
 
@@ -112,7 +112,7 @@ CBXPy is designed to express common abstractions between different variants of C
 Most of the code uses basic Python functionality, where the ensemble $x$ is modeled as an array-like structure. For certain specific features, like broadcasting-behavior, array copying, and index selection, we fall back to the  ```numpy``` implementation [@harris2020array]. However, it should be noted that an adaption to PyTorch [@paszke2019pytorch;@scikitopt] is straightforward. For the computation of the consensus point, we rely on the ```logsumexp``` function from ```scipy``` [@2020SciPy-NMeth], which allows for a numerically stable and efficient evaluation of the weighted mean. Furthermore, we employ the ```matplotlib``` library [@Hunter_2007] for visualization purposes.
 
 
-A simple approach for achieving parallelization is done by running multiple instances of a single dynamic in parallel. Additionally, in the python version one has the option of low-level parallelization exploiting array operations in 
+A simple approach for achieving parallelization is done by running multiple instances of a single dynamic in parallel. Additionally, in the python version one has the option of low-level parallelization exploiting array operations in
 ```numpy```. An ensemble has the dimension $M\times N\times d$, where $M$ is the number of runs, $N$ the number of particles and $d$ the dimension of the state space.
 
 The package is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via ```pip```. It is licensed under the MIT license. A documentation is available [online](https://pdips.github.io/CBXpy/).
