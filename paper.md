@@ -140,6 +140,7 @@ RB was supported by the Advanced Grant Nonlocal-CPD (Nonlocal PDEs for Complex P
 in applied analysis and medical imaging".
 KR acknowledges support from the German Federal Ministry of Education and Research and the Bavarian State Ministry for Science and the Arts.
 TR acknowledges support from DESY (Hamburg, Germany), a member of the Helmholtz Association HGF.
+UV acknowledges support from the Agence Nationale de la Recherche under grant ANR-23-CE40-0027 (IPSO).
 
 We thank the Lorentz Center in Leiden for their kind hospitality during the workshop "Purpose-driven particle systems" in Spring 2023, where this work was initiated.
 
