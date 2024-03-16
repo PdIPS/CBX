@@ -1,5 +1,5 @@
 ---
-title: 'CBX: Python and Julia Libraries for Generalised Consensus-Based Optimisation'
+title: 'CBX: Python and Julia Packages for Consensus-Based Interacting Particle Methods'
 tags:
   - Python
   - Julia
@@ -52,33 +52,33 @@ bibliography: paper.bib
 
 # Summary
 
-We introduce [CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/); respectively, Python and Julia implementations of CBX (generalised consensus-based optimisation, CBO) methods for global, gradient-free optimisation. The _raison d'être_ of our libraries is twofold: to offer high-performance implementations of CBX methods that can be used outside of academic tests, and to provide a general interface which can accommodate and be extended to other members of the CBX family, not just standard CBO. Python and Julia were selected as the leading high-level languages in terms of usage and performance, as well as their popularity among the scientific computing community. Both libraries have been developed with a common _ethos_, ensuring a similar API and core functionality, while leveraging the strengths of each language and writing idiomatic code.
+We introduce with [CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) Python and Julia implementations of CBX (generalised consensus-based optimisation (CBO)) methods for global, derivative-free optimisation. The _raison d'être_ of our libraries is twofold. On the one side, to offer high-performance implementations of CBX methods that can be used outside of academic tests, while, on the other, to provide a general interface that can accommodate and be extended to other members of the CBX family, not just standard CBO. Python and Julia were selected as the leading high-level languages in terms of usage and performance, as well as their popularity among the scientific computing community. Both libraries have been developed with a common _ethos_, ensuring a similar API and core functionality, while leveraging the strengths of each language and writing idiomatic code.
 
 # Mathematical background
 
-Consensus-based optimisation (CBO) is an approach to solve the _global minimisation problem_: given a (continuous) _objective function_ $f:\mathbb{R}^D \rightarrow \mathbb{R}$, find
+Consensus-based optimisation (CBO) is an approach to solve the _global minimisation problem_: Given a (continuous) _objective function_ $f:\mathbb{R}^d \rightarrow \mathbb{R}$, find
 
 $$
-x^* = \operatorname*{argmin}_{x\in\mathbb{R}^D} f(x);
+x^* = \operatorname*{argmin}_{x\in\mathbb{R}^d} f(x),
 $$
 
-i.e., find the _global minimium_ point $x^*$, where $f$ takes its lowest value. Such problems arise in diverse disciplines such as engineering, where $x$ might represent a vector of design parameters for a structure and $f$ a function related to its cost and structural integrity, or machine learning, where $x$ could denote a vector of neural network parameters and $f$ a penalisation measuring the discrepancy with data.
+i.e., find the _global minimizer_ $x^*$, where $f$ attains its lowest value. Such problems arise in a variety of disciplines including engineering, where $x$ might represent a vector of design parameters for a structure and $f$ a function related to its cost and structural integrity, or machine learning, where $x$ could comprise the neural network parameters and $f$ the empirical risk, which measures the discrepancy of the neural network prediction with the observed data.
 
-In some cases, so-called _gradient-based methods_ (those that involve updating a guess of $x^*$ by evaluating the gradient $\nabla f$) achieve state-of-the-art performance in the global minimisation problem. However, in scenarios where $f$ is _non-convex_ (when $f$ could have many _local minima_), where $f$ is _non-smooth_ ($\nabla f$ is not well-defined), or where the evaluation of $\nabla f$ is impractical due to cost or complexity, it is necessary to employ _derivative-free_ methods. Numerous techniques exist for derivative-free optimisation, such as _random_ or _pattern search_ [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], _Bayesian optimisation_ [@movckus1975bayesian] or _simulated annealing_ [@henderson2003theory]. Here, we focus on _particle-based methods_; specifically, consensus-based optimisation (CBO), as proposed by @pinnau2017consensus, and the consensus-based taxonomy of related techniques, which we term _CBX_.
+In some cases, so-called _gradient-based methods_ (those that involve updating a guess of $x^*$ by evaluating the gradient $\nabla f$) achieve state-of-the-art performance in the global minimisation problem. However, in scenarios where $f$ is _non-convex_ (when $f$ could have many _local minima_), where $f$ is _non-smooth_ ($\nabla f$ is not well-defined), or where the evaluation of $\nabla f$ is impractical due to cost or complexity, it is necessary to resort to _derivative-free_ methods. Numerous techniques exist for derivative-free optimisation, such as _random_ or _pattern search_ [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], _Bayesian optimisation_ [@movckus1975bayesian] or _simulated annealing_ [@henderson2003theory]. Here, we focus on _particle-based methods_, specifically, consensus-based optimisation (CBO), as proposed by @pinnau2017consensus, and the consensus-based taxonomy of related techniques, which we term _CBX_.
 
-CBO uses a finite number $N$ of _agents_ (driven particles), $x_t=(x_t^1,\dots,x_t^N)$, to explore the landscape of $f$ without evaluating any of its derivatives (as do other CBX methods). At each time $t$, the agents evaluate the objective function at their position, $f(x_t^i)$, and define a _consensus point_ $c_\alpha$. This point is an approximation of the global minimiser $x^*$, and is constructed by weighing each agent's position against a _"Gibbs-like" distribution_ [@boltzmann1868studien], $\exp(-\alpha f(x))$:
+CBO uses a finite number $N$ of _agents_ (particles), $x_t=(x_t^1,\dots,x_t^N)$, to explore the landscape of $f$ without evaluating any of its derivatives (as do other CBX methods). At each time $t$, the agents evaluate the objective function at their position, $f(x_t^i)$, and define a _consensus point_ $c_\alpha$. This point is an approximation of the global minimiser $x^*$, and is constructed by weighing each agent's position against a _Gibbs-like distribution_ $\exp(-\alpha f)$ [@boltzmann1868studien]. More rigorously,
 
 $$
 c_\alpha(x_t) =
 \frac{1}{ \sum_{i=1}^N \omega_\alpha(x_t^i) }
 \sum_{i=1}^N x_t^i \, \omega_\alpha(x_t^i),
 \quad\text{where}\quad
-\omega_\alpha(\,\cdot\,) = \mathrm{exp}(-\alpha f(\,\cdot\,)),
+\omega_\alpha(\,\cdot\,) = \mathrm{exp}(-\alpha f(\,\cdot\,))
 $$
 
-for some $\alpha>0$. The exponential weights in the definition favour those points $x_t^i$ where $f(x_t^i)$ is lowest, and comparatively ignore the rest. If all the found values of the objective function are approximately the same, $c_\alpha(x_t)$ is roughly an arithmetic mean; if, instead, one particle is much better than the rest, $c_\alpha(x_t)$ will be very close to its position.
+for some $\alpha>0$. The exponential weights in the definition favour those points $x_t^i$ where $f(x_t^i)$ is lowest, and comparatively ignore the rest, in particular for larger $\alpha$. If all the found values of the objective function are approximately the same, $c_\alpha(x_t)$ is roughly an arithmetic mean. Instead, if one particle is much better than the rest, $c_\alpha(x_t)$ will be very close to its position.
 
-Once the consensus point is defined, the particles evolve in time following the _stochastic differential equation_ (SDE)
+Once the consensus point is computed, the particles evolve in time following the _stochastic differential equation_ (SDE)
 
 $$
 \mathrm{d}x_t^i =
@@ -87,14 +87,14 @@ $$
 }_{
 \text{consensus drift}
 }
-+ \sqrt{2\sigma^2}\ \underbrace{
++ \sigma\ \underbrace{
 \left\| x_t^i - c_\alpha(x_t) \right\| \mathrm{d}B_t^i
 }_{
 \text{scaled diffusion}
 },
 $$
 
-where $\lambda$ and $\sigma$ are positive parameters, and where $B_t^i$ are independent Brownian motions in $D$ dimensions. The _consensus drift_ is a deterministic term which drives each agent towards the consensus point, at rate $\lambda$; meanwhile, the _scaled diffusion_ is a stochastic term that encourages exploration of the landscape. While both the agent's positions and the consensus point evolve in time, it is expected that all agents will eventually reach the same position, and that the consensus point $c_\alpha(x_t)$ will be a good approximation of $x^*$. Other variations of the method, such as CBO with anisotropic noise [@carrillo2021consensus], _polarised CBO_ [@bungert2022polarized], or _consensus-based sampling_ (CBS) [@carrillo2022consensus], have been proposed.
+where $\lambda$ and $\sigma$ are positive parameters, and where $B_t^i$ are independent Brownian motions in $d$ dimensions. The _consensus drift_ is a deterministic term that drives each agent towards the consensus point, at rate $\lambda$. Meanwhile, the _scaled diffusion_ is a stochastic term that encourages exploration of the landscape. While both the agents' positions and the consensus point evolve in time, it is expected that all agents eventually reach the same position and that the consensus point $c_\alpha(x_t)$ is a good approximation of $x^*$. Other variations of the method, such as CBO with anisotropic noise [@carrillo2021consensus], _polarised CBO_ [@bungert2022polarized], or _consensus-based sampling_ (CBS) [@carrillo2022consensus] have been proposed.
 
 In practice, the solution to the SDE above cannot be found exactly. Instead, an _Euler-Maruyama scheme_ [@KP1992] is used to update the position of the agents. The update is given by
 
@@ -102,13 +102,13 @@ $$
 x^i \gets x^i
 -\lambda \,\Delta t
 \left( x^i - c_\alpha(x) \right)
-+ \sqrt{2\sigma^2 \Delta t}\
++ \sigma\sqrt{\Delta t}\
 \left\| x^i - c_\alpha(x) \right\| \xi^i,
 $$
 
 where $\Delta t > 0$ is the _step size_ and $\xi^i \sim \mathcal{N}(0,\mathrm{Id})$ are independent, identically distributed, standard normal random vectors.
 
-As a particle-based family of methods, CBX is conceptually related to other optimisation approaches inspired in biology, like _particle-swarm optimisation_ (PSO) [@kennedy1995particle], physics, like _simulated annealing_ (SA) [@henderson2003theory], or other heuristics [@mohan2012survey;@karaboga2014comprehensive;@yang2009firefly;@bayraktar2013wind]. However, unlike many such methods, CBX has been designed to be compatible with rigorous convergence analysis at the mean-field level (the infinite-particle limit, see @huang2021MFLCBO). Many convergence results have been shown, whether in the original formulation [@carrillo2018analytical;@fornasier2021consensus], for CBO with anisotropic noise [@carrillo2021consensus;@fornasier2021convergence], with memory effects [@riedl2022leveraging], with truncated noise [@fornasier2023consensus], polarised CBO [@bungert2022polarized], and PSO [@qiu2022PSOconvergence]. The relation between CBO and _stochastic gradient descent_ has been recenty established by @riedl2023gradient, which suggests a previously unknown yet fundamental connection between derive-free and gradient-based approaches.
+As a particle-based family of methods, CBX is conceptually related to other optimisation approaches inspired from biology, like _particle-swarm optimisation_ (PSO) [@kennedy1995particle], physics, like _simulated annealing_ (SA) [@henderson2003theory], or other heuristics [@mohan2012survey;@karaboga2014comprehensive;@yang2009firefly;@bayraktar2013wind]. However, unlike many such methods, CBX has been designed to be compatible with rigorous convergence analysis at the mean-field level (the infinite-particle limit, see @huang2021MFLCBO). Many convergence results have been shown, whether in the original formulation [@carrillo2018analytical;@fornasier2021consensus], for CBO with anisotropic noise [@carrillo2021consensus;@fornasier2021convergence], with memory effects [@riedl2022leveraging], with truncated noise [@fornasier2023consensus], polarised CBO [@bungert2022polarized], and PSO [@qiu2022PSOconvergence]. The relation between CBO and _stochastic gradient descent_ has been recently established by [@riedl2023gradient], which suggests a previously unknown yet fundamental connection between derivative-free and gradient-based approaches.
 
 ![Typical evolution of a CBO method minimising the Ackley function [@ackley2012connectionist].](JOSS.png){ width=100% }
 
@@ -118,15 +118,15 @@ CBX methods have been successfully applied and extended to several different set
 
 In general, very few implementations of CBO already exist, and none have been designed with the generality of other CBX methods in mind. We summarise here the related software:
 
-Regarding Python, we refer to @duan2023pypop7 and @scikitopt for a collection of various derivative-free optimisation strategies. A very recent implementation of Bayesian optimisation is described by @Kim2023. PSO and SA implementations are already available in @miranda2018pyswarms, @scikitopt,@deapJMLR2012, and @pagmo2017, which are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. The first publicly available Python packages implementing CBX algorithms were given by some of the authors together with collaborators: @Igor_CBOinPython implement standard CBO [@pinnau2017consensus], and [@Roith_polarcbo] provides polarised CBO [@bungert2022polarized]. [CBXPy](https://pdips.github.io/CBXpy/) is a significant extension of the latter.
+Regarding Python, we refer to [@duan2023pypop7] and [@scikitopt] for a collection of various derivative-free optimisation strategies. A very recent implementation of Bayesian optimisation is described by [@Kim2023]. PSO and SA implementations are already available in [@miranda2018pyswarms;@scikitopt;@deapJMLR2012;@pagmo2017], which are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. The first publicly available Python packages implementing CBX algorithms were given by some of the authors together with collaborators. [@Igor_CBOinPython] implement standard CBO [@pinnau2017consensus], and [@Roith_polarcbo] provides polarised CBO [@bungert2022polarized]. [CBXPy](https://pdips.github.io/CBXpy/) is a significant extension of the latter.
 
-Regarding Julia, PSO and SA methods are, among others, implemented by @mogensen2018optim, @mejia2022metaheuristics, and @Bergmann2022. PSO and SA are also included in the meta-library @DR2023, as well as Nelder-Mead, which is a direct search method. The first specific Julia implementation of standard CBO was given by one of the authors [@Bailo_consensus]; this has now been deprecated in favour of [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/), which offers additional CBX methods and a far more general interface.
+Regarding Julia, PSO and SA methods are, among others, implemented by [@mogensen2018optim;@mejia2022metaheuristics;@Bergmann2022]. PSO and SA are also included in the meta-library [@DR2023], as well as Nelder-Mead, which is a direct search method. One of the authors gave the first specific Julia implementation of standard CBO, [@Bailo_consensus], which has now been deprecated in favour of [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/), which offers additional CBX methods and a far more general interface.
 
 # Features
 
-[CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) provide a lightweigh and easy-to-understand high level interface: an existing function can be optimised with just one call. Method selection, parameters, different approaches to particle inisialisation, and termination criteria can be specified directly through this interface, offering a flexible point of entry for the casual user. Some of the methods provided are standard CBO [@pinnau2017consensus], CBO with mini-batching [@carrillo2021consensus], polarised CBO [@bungert2022polarized], CBO with memory effects [@grassi2020particle;@riedl2022leveraging], and consensus-based sampling (CBS) [@carrillo2022consensus]. Parallelisation tools are available.
+[CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) provide a lightweigh and easy-to-understand high-level interface. An existing function can be optimised with just one call. Method selection, parameters, different approaches to particle inisialisation, and termination criteria can be specified directly through this interface, offering a flexible point of entry for the casual user. Some of the methods provided are standard CBO [@pinnau2017consensus], CBO with mini-batching [@carrillo2021consensus], polarised CBO [@bungert2022polarized], CBO with memory effects [@grassi2020particle;@riedl2022leveraging], and consensus-based sampling (CBS) [@carrillo2022consensus]. Parallelisation tools are available.
 
-A more proficient user will benefit from a fully documented interface, which allows the specification of advanced options (e.g. debug output, the noise model, or the numerical approach to the matrix square root of the covariance matrix). Both libraries offer performance evaluation methods as well as visualisation tools.
+A more proficient user will benefit from a fully documented interface, which allows the specification of advanced options (e.g., debug output, the noise model, or the numerical approach to the matrix square root of the covariance matrix). Both libraries offer performance evaluation methods as well as visualisation tools.
 
 Ultimately, a low-level interface (including documentation and full-code examples) is provided. Both libraries have been designed to express common abstractions in the CBX family while allowing customisation. Users can easily implement new CBX methods or modify the behaviour of the existing implementation by strategically overriding certain hooks. The stepping of the methods can also be controlled manually.
 
@@ -142,7 +142,7 @@ The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be 
 
 ![ConsensusBasedX.jl logo.](CBXjl.png){ width=50% }
 
-[ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) has been almost entirely written in native Julia (with the exception of a single call to LAPACK). The code has been developed with performance in mind, thus the critical routines are fully type-stable and allocation-free. A specific tool is provided to benchmark a typical method iteration, which can be used to detect allocations. Through this tool, unit tests are in place to ensure zero allocations in all the provided methods. The benchmarking tool is also available to users, who can use it to test their implementations of $f(x)$, as well as any new CBX methods.
+[ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) has been almost entirely written in native Julia (with the exception of a single call to LAPACK). The code has been developed with performance in mind, thus the critical routines are fully type-stable and allocation-free. A specific tool is provided to benchmark a typical method iteration, which can be used to detect allocations. Through this tool, unit tests are in place to ensure zero allocations in all the provided methods. The benchmarking tool is also available to users, who can use it to test their implementations of $f$, as well as any new CBX methods.
 
 The library is available on [GitHub](https://github.com/PdIPS/ConsensusBasedX.jl). It has been registered in the [general Julia registry](https://github.com/JuliaRegistries/General), and therefore it can be installed by running `]add ConsensusBasedX`. It is licensed under the MIT license. The [documentation](https://pdips.github.io/ConsensusBasedX.jl/) is available online.
 
