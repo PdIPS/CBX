@@ -56,7 +56,7 @@ We introduce [CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](ht
 
 # Mathematical background
 
-Consensus-based optimisation (CBO) is an approach to solve the _global minimisation problem_: given a (continuous) _objective function_ $f(x)=\mathbb{R}^D \rightarrow \mathbb{R}$, find
+Consensus-based optimisation (CBO) is an approach to solve the _global minimisation problem_: given a (continuous) _objective function_ $f:\mathbb{R}^D \rightarrow \mathbb{R}$, find
 
 $$
 x^* = \operatorname*{argmin}_{x\in\mathbb{R}^D} f(x);
@@ -66,7 +66,7 @@ i.e., find the _global minimium_ point $x^*$, where $f$ takes its lowest value. 
 
 In some cases, so-called _gradient-based methods_ (those that involve updating a guess of $x^*$ by evaluating the gradient $\nabla f$) achieve state-of-the-art performance in the global minimisation problem. However, in scenarios where $f$ is _non-convex_ (when $f$ could have many _local minima_), where $f$ is _non-smooth_ ($\nabla f$ is not well-defined), or where the evaluation of $\nabla f$ is impractical due to cost or complexity, it is necessary to employ _derivative-free_ methods. Numerous techniques exist for derivative-free optimisation, such as _random_ or _pattern search_ [@friedman1947planning;@rastrigin1963convergence;@hooke1961direct], _Bayesian optimisation_ [@movckus1975bayesian] or _simulated annealing_ [@henderson2003theory]. Here, we focus on _particle-based methods_; specifically, consensus-based optimisation (CBO), as proposed by @pinnau2017consensus, and the consensus-based taxonomy of related techniques, which we term _CBX_.
 
-CBO uses a finite number $N$ of _agents_ (driven particles), $x_t=(x_t^1,\dots,x_t^N)$, to explore the landscape of $f$ without evaluating any of its derivatives (as do other CBX methods). At each time $t$, the agents evaluate the objective function at their position, $f(x_t^i)$, and define a _consensus point_ $c_\alpha$. This point is an approximation of the global minimiser $x^*$, and is constructed by weighing each agent's position against a _"Gibbs-like" distribution_, $\exp(-\alpha f(x))$:
+CBO uses a finite number $N$ of _agents_ (driven particles), $x_t=(x_t^1,\dots,x_t^N)$, to explore the landscape of $f$ without evaluating any of its derivatives (as do other CBX methods). At each time $t$, the agents evaluate the objective function at their position, $f(x_t^i)$, and define a _consensus point_ $c_\alpha$. This point is an approximation of the global minimiser $x^*$, and is constructed by weighing each agent's position against a _"Gibbs-like" distribution_ [@boltzmann1868studien], $\exp(-\alpha f(x))$:
 
 $$
 c_\alpha(x_t) =
@@ -134,7 +134,7 @@ Ultimately, a low-level interface (including documentation and full-code example
 
 ![CBXPy logo.](CBXPy.png){ width=50% }
 
-Most of the [CBXPy](https://pdips.github.io/CBXpy/) implementation uses basic Python functionality, and the agents are handled as an array-like structure. For certain specific features, like broadcasting-behavior, array copying, and index selection, we fall back to the `numpy` implementation [@harris2020array]. However, it should be noted that an adaption to PyTorch [@paszke2019pytorch;@scikitopt] is straightforward, as the code has been structured following with their "optimiser" classes in mind.
+Most of the [CBXPy](https://pdips.github.io/CBXpy/) implementation uses basic Python functionality, and the agents are handled as an array-like structure. For certain specific features, like broadcasting-behavior, array copying, and index selection, we fall back to the `numpy` implementation [@harris2020array]. However, it should be noted that an adaption to other array or tensor libraries like PyTorch [@paszke2019pytorch] is straightforward. Compatibility with the latter, enables gradient-free deep learning directly on the GPU, as demonstrated in the documentation.
 
 The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via `pip`. It is licensed under the MIT license. The [documentation](https://pdips.github.io/CBXpy/) is available online.
 
@@ -151,7 +151,7 @@ The library is available on [GitHub](https://github.com/PdIPS/ConsensusBasedX.jl
 RB was supported by the Advanced Grant Nonlocal-CPD (Nonlocal PDEs for Complex Particle Dynamics: Phase Transitions, Patterns and Synchronisation) of the European Research Council Executive Agency (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 883363) and by the EPSRC grant EP/T022132/1 "Spectral element methods for fractional differential equations, with applications
 in applied analysis and medical imaging".
 KR acknowledges support from the German Federal Ministry of Education and Research and the Bavarian State Ministry for Science and the Arts.
-TR acknowledges support from DESY (Hamburg, Germany), a member of the Helmholtz Association HGF.
+TR acknowledges support from DESY (Hamburg, Germany), a member of the Helmholtz Association HGF. This research was supported in part through the Maxwell computational resources operated at Deutsches Elektronen-Synchrotron DESY, Hamburg, Germany. 
 UV acknowledges support from the Agence Nationale de la Recherche under grant ANR-23-CE40-0027 (IPSO).
 
 We thank the Lorentz Center in Leiden for their kind hospitality during the workshop "Purpose-driven particle systems" in Spring 2023, where this work was initiated.
