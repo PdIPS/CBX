@@ -28,24 +28,24 @@ authors:
     orcid: 0000-0002-7629-7184
     affiliation: '8, 9'
 affiliations:
-  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
-    index: 6
-  - name: Technical University of Munich
-    index: 4
-  - name: Munich Center for Machine Learning
-    index: 5
-  - name: University of Wuppertal
-    index: 7
+  - name: Mathematical Institute, University of Oxford
+    index: 1
   - name: Delft University of Technology
     index: 2
   - name: Mathematics Institute, University of Warwick
     index: 3
+  - name: Technical University of Munich
+    index: 4
+  - name: Munich Center for Machine Learning
+    index: 5
+  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
+    index: 6
+  - name: University of Wuppertal
+    index: 7
   - name: MATHERIALS team, Inria Paris
     index: 8
   - name: École des Ponts
     index: 9
-  - name: Mathematical Institute, University of Oxford
-    index: 1
 date: 15 March, 2024
 bibliography: paper.bib
 ---
