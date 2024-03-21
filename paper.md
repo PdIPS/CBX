@@ -1,5 +1,5 @@
 ---
-title: 'CBX: Python and Julia Packages for\\protect\\\\Consensus-Based Interacting Particle Methods'
+title: 'CBX: Python and Julia Packages for <nobr>Consensus-Based Interacting Particle Methods</nobr>'
 tags:
   - Python
   - Julia
