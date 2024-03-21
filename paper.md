@@ -6,46 +6,46 @@ tags:
   - Optimisation
   - Sampling
 authors:
-  - name: Tim Roith
-    orcid: 0000-0001-8440-2928
-    affiliation: 1
-  - name: Konstantin Riedl
-    orcid: 0000-0002-2206-4334
-    affiliation: '2, 3'
-  - name: Claudia Totzeck
-    orcid: 0000-0001-6283-7154
-    affiliation: 4
-  - name: Alethea Barbaro
-    orcid: 0000-0001-9856-2818
-    affiliation: 5
-  - name: Susana N. Gomes
-    orcid: 0000-0002-8731-367X
-    affiliation: 6
-  - name: Urbain Vaes
-    orcid: 0000-0002-7629-7184
-    affiliation: '7, 8'
   - name: Rafael Bailo
     orcid: 0000-0001-8018-3799
-    affiliation: 9
+    affiliation: 1
+  - name: Alethea Barbaro
+    orcid: 0000-0001-9856-2818
+    affiliation: 2
+  - name: Susana N. Gomes
+    orcid: 0000-0002-8731-367X
+    affiliation: 3
+  - name: Konstantin Riedl
+    orcid: 0000-0002-2206-4334
+    affiliation: '4, 5'
+  - name: Tim Roith
+    orcid: 0000-0001-8440-2928
+    affiliation: 6
+  - name: Claudia Totzeck
+    orcid: 0000-0001-6283-7154
+    affiliation: 7
+  - name: Urbain Vaes
+    orcid: 0000-0002-7629-7184
+    affiliation: '8, 9'
 affiliations:
   - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
-    index: 1
-  - name: Technical University of Munich
-    index: 2
-  - name: Munich Center for Machine Learning
-    index: 3
-  - name: University of Wuppertal
-    index: 4
-  - name: Delft University of Technology
-    index: 5
-  - name: Mathematics Institute, University of Warwick
     index: 6
-  - name: MATHERIALS team, Inria Paris
+  - name: Technical University of Munich
+    index: 4
+  - name: Munich Center for Machine Learning
+    index: 5
+  - name: University of Wuppertal
     index: 7
-  - name: École des Ponts
+  - name: Delft University of Technology
+    index: 2
+  - name: Mathematics Institute, University of Warwick
+    index: 3
+  - name: MATHERIALS team, Inria Paris
     index: 8
-  - name: Mathematical Institute, University of Oxford
+  - name: École des Ponts
     index: 9
+  - name: Mathematical Institute, University of Oxford
+    index: 1
 date: 15 March, 2024
 bibliography: paper.bib
 ---
