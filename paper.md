@@ -96,7 +96,7 @@ $$
 
 where $\lambda$ and $\sigma$ are positive parameters, and where $B_t^i$ are independent Brownian motions in $d$ dimensions. The _consensus drift_ is a deterministic term that drives each agent towards the consensus point, with rate $\lambda$. Meanwhile, the _scaled diffusion_ is a stochastic term that encourages exploration of the landscape. While both the agents' positions and the consensus point evolve in time, it has been proven that all agents eventually reach the same position and that the consensus point $c_\alpha(x_t)$ is a good approximation of $x^*$ [@carrillo2018analytical;@fornasier2021consensus]. Other variations of the method, such as CBO with anisotropic noise [@carrillo2021consensus], _polarised CBO_ [@bungert2022polarized], or _consensus-based sampling_ (CBS) [@carrillo2022consensus] have also been proposed.
 
-In practice, the solution to the SDE above cannot be found exactly. Instead, an _Euler-Maruyama scheme_ [@KP1992] is used to update the position of the agents. The update is given by
+In practice, the solution to the SDE above cannot be found exactly. Instead, an _Euler--Maruyama scheme_ [@KP1992] is used to update the position of the agents. The update is given by
 
 $$
 x^i \gets x^i
@@ -120,7 +120,7 @@ In general, very few implementations of CBO already exist, and none have been de
 
 Regarding Python, we refer to @duan2023pypop7 and @scikitopt for a collection of various derivative-free optimisation strategies. A very recent implementation of Bayesian optimisation is described by @Kim2023. PSO and SA implementations are already available [@miranda2018pyswarms;@scikitopt;@deapJMLR2012;@pagmo2017]. They are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. The first publicly available Python packages implementing CBX algorithms were given by some of the authors together with collaborators. @Igor_CBOinPython implement standard CBO [@pinnau2017consensus], and @Roith_polarcbo provide an implementation of polarised CBO [@bungert2022polarized]. [CBXPy](https://pdips.github.io/CBXpy/) is a significant extension of the latter.
 
-Regarding Julia, PSO and SA methods are, among others, implemented by @mogensen2018optim, @mejia2022metaheuristics, and @Bergmann2022. PSO and SA are also included in the meta-library [@DR2023], as well as Nelder-Mead, which is a direct search method. One of the authors gave the first specific Julia implementation of standard CBO [@Bailo_consensus]; that package has now been deprecated in favour of [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/), which offers additional CBX methods and a far more general interface.
+Regarding Julia, PSO and SA methods are, among others, implemented by @mogensen2018optim, @mejia2022metaheuristics, and @Bergmann2022. PSO and SA are also included in the meta-library [@DR2023], as well as Nelder--Mead, which is a direct search method. One of the authors gave the first specific Julia implementation of standard CBO [@Bailo_consensus]; that package has now been deprecated in favour of [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/), which offers additional CBX methods and a far more general interface.
 
 # Features
 
