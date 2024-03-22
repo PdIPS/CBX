@@ -28,23 +28,23 @@ authors:
     orcid: 0000-0002-7629-7184
     affiliation: '8, 9'
 affiliations:
-  - name: Mathematical Institute, University of Oxford
+  - name: Mathematical Institute, University of Oxford, United Kingdom
     index: 1
-  - name: Delft University of Technology
+  - name: Delft University of Technology, The Netherlands
     index: 2
-  - name: Mathematics Institute, University of Warwick
+  - name: Mathematics Institute, University of Warwick, United Kingdom
     index: 3
-  - name: Technical University of Munich
+  - name: Technical University of Munich, Germany
     index: 4
-  - name: Munich Center for Machine Learning
+  - name: Munich Center for Machine Learning, Germany
     index: 5
   - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
     index: 6
-  - name: University of Wuppertal
+  - name: University of Wuppertal, Germany
     index: 7
-  - name: MATHERIALS team, Inria Paris
+  - name: MATHERIALS team, Inria Paris, France
     index: 8
-  - name: École des Ponts
+  - name: École des Ponts, France
     index: 9
 date: 22 March, 2024
 bibliography: paper.bib
