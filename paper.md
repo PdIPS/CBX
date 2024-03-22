@@ -46,7 +46,7 @@ affiliations:
     index: 8
   - name: École des Ponts
     index: 9
-date: 15 March, 2024
+date: 22 March, 2024
 bibliography: paper.bib
 ---
 
