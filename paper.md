@@ -118,27 +118,36 @@ CBX methods have been successfully applied and extended to several different set
 
 In general, very few implementations of CBO already exist, and none have been designed with the generality of other CBX methods in mind. We summarise here the related software:
 
-Regarding Python, we refer to @duan2023pypop7 and @scikitopt for a collection of various derivative-free optimisation strategies. A very recent implementation of Bayesian optimisation is described by @Kim2023. PSO and SA implementations are already available [@miranda2018pyswarms;@scikitopt;@deapJMLR2012;@pagmo2017]. They are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. The first publicly available Python packages implementing CBX algorithms were given by some of the authors together with collaborators. @Igor_CBOinPython implement standard CBO [@pinnau2017consensus], and @Roith_polarcbo provide an implementation of polarised CBO [@bungert2022polarized]. [CBXPy](https://pdips.github.io/CBXpy/) is a significant extension of the latter.
+Regarding Python, we refer to @duan2023pypop7 and @scikitopt for a collection of various derivative-free optimisation strategies. A very recent implementation of Bayesian optimisation is described by @Kim2023. Furthermore, CMA-ES @hansen1996adapting was implemented in @hansen2019pycma. To the best of our knowledge the connection between consensus-based methods and evolution strategies is not fully understood, and is therefore an interesting future direction. PSO and SA implementations are already available [@miranda2018pyswarms;@scikitopt;@deapJMLR2012;@pagmo2017]. They are widely used by the community and provide a rich framework for the respective methods. However, adjusting these implementations to CBO is not straightforward. The first publicly available Python packages implementing CBX algorithms were given by some of the authors together with collaborators. @Igor_CBOinPython implement standard CBO [@pinnau2017consensus], and @Roith_polarcbo provide an implementation of polarised CBO [@bungert2022polarized]. [CBXPy](https://pdips.github.io/CBXpy/) is a significant extension of the latter.
 
-Regarding Julia, PSO and SA methods are, among others, implemented by @mogensen2018optim, @mejia2022metaheuristics, and @Bergmann2022. PSO and SA are also included in the meta-library [@DR2023], as well as Nelder--Mead, which is a direct search method. One of the authors gave the first specific Julia implementation of standard CBO [@Bailo_consensus]; that package has now been deprecated in favour of [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/), which offers additional CBX methods and a far more general interface.
+Regarding Julia, PSO and SA methods are, among others, implemented by @mogensen2018optim, @mejia2022metaheuristics, and @Bergmann2022. PSO and SA are also included in the meta-library [@DR2023], as well as Nelder--Mead, which is a direct search method. The latter method is also implemented in @Bergmann2022, which also provides a manifold variant of CMA-ES @colutto2009cma. One of the authors gave the first specific Julia implementation of standard CBO [@Bailo_consensus]; that package has now been deprecated in favour of [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/), which offers additional CBX methods and a far more general interface.
 
 # Features
 
-[CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) provide a lightweigh and easy-to-understand high-level interface. An existing function can be optimised with just one call. Method selection, parameters, different approaches to particle initialisation, and termination criteria can be specified directly through this interface, offering a flexible point of entry for the casual user. Some of the methods provided are standard CBO [@pinnau2017consensus], CBO with mini-batching [@carrillo2021consensus], polarised CBO [@bungert2022polarized], CBO with memory effects [@grassi2020particle;@riedl2022leveraging], and consensus-based sampling (CBS) [@carrillo2022consensus]. Parallelisation tools are available.
+[CBXPy](https://pdips.github.io/CBXpy/) and [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) provide a lightweigh and high-level interface. An existing function can be optimised with just one call. Method selection, parameters, different approaches to particle initialisation, and termination criteria can be specified directly through this interface, offering a flexible point of entry for the casual user. Some of the methods provided are standard CBO [@pinnau2017consensus], CBO with mini-batching [@carrillo2021consensus], polarised CBO [@bungert2022polarized], CBO with memory effects [@grassi2020particle;@riedl2022leveraging], and consensus-based sampling (CBS) [@carrillo2022consensus]. Parallelisation tools are available.
 
 A more proficient user will benefit from the fully documented interface, which allows the specification of advanced options (e.g., debug output, the noise model, or the numerical approach to the matrix square root of the covariance matrix). Both libraries offer performance evaluation methods as well as visualisation tools.
 
 Ultimately, a low-level interface (including documentation and full-code examples) is provided. Both libraries have been designed to express common abstractions in the CBX family while allowing customisation. Users can easily implement new CBX methods or modify the behaviour of the existing implementation by strategically overriding certain hooks. The stepping of the methods can also be controlled manually.
 
-## CBXPy specifics
+## CBXPy
 
 ![CBXPy logo.](CBXPy.png){ width=50% }
 
 Most of the [CBXPy](https://pdips.github.io/CBXpy/) implementation uses basic Python functionality, and the agents are handled as an array-like structure. For certain specific features, like broadcasting-behaviour, array copying, and index selection, we fall back to the `numpy` implementation [@harris2020array]. However, it should be noted that an adaptation to other array or tensor libraries like PyTorch [@paszke2019pytorch] is straightforward. Compatibility with the latter enables gradient-free deep learning directly on the GPU, as demonstrated in the documentation.
 
-The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via `pip`. It is licensed under the MIT license. The [documentation](https://pdips.github.io/CBXpy/) is available online.
+The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via `pip`. It is licensed under the MIT license. Below, we provide a short example on how to optimize a function with CBXPy.
 
-## ConsensusBasedX.jl specifics
+```Python
+  from cbx.dynamics import CBO        # import the CBO class
+
+  f = lambda x: x[0]**2 + x[1]**2     # define the function to minimize
+  x = CBO(f, d=2).optimize()          # run the optimisation
+```
+
+More examples and details on the implementation are available in the [documentation](https://pdips.github.io/CBXpy/).
+
+## ConsensusBasedX.jl
 
 ![ConsensusBasedX.jl logo.](CBXjl.png){ width=50% }
 
