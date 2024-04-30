@@ -139,9 +139,9 @@ Most of the [CBXPy](https://pdips.github.io/CBXpy/) implementation uses basic Py
 The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via `pip`. It is licensed under the MIT license. Below, we provide a short example on how to optimise a function with CBXPy.
 
 ```Python
-  from cbx.dynamics import CBO        # import the CBO class
-  f = lambda x: x[0]**2 + x[1]**2     # define the function to minimise
-  x = CBO(f, d=2).optimize()          # run the optimisation
+from cbx.dynamics import CBO        # import the CBO class
+f = lambda x: x[0]**2 + x[1]**2     # define the function to minimise
+x = CBO(f, d=2).optimize()          # run the optimisation
 ```
 
 More examples and details on the implementation are available in the [documentation](https://pdips.github.io/CBXpy/).
@@ -154,9 +154,9 @@ More examples and details on the implementation are available in the [documentat
 
 Basic function minimisation can be performed by running:
 ```julia
-  using ConsensusBasedX               # load the ConsensusBasedX package
-  f(x) = x[1]^2 + x[2]^2              # define the function to minimise
-  x = minimise(f, D = 2)              # run the minimisation
+using ConsensusBasedX               # load the ConsensusBasedX package
+f(x) = x[1]^2 + x[2]^2              # define the function to minimise
+x = minimise(f, D = 2)              # run the minimisation
 ```
 The library is available on [GitHub](https://github.com/PdIPS/ConsensusBasedX.jl). It has been registered in the [general Julia registry](https://github.com/JuliaRegistries/General), and therefore it can be installed by running `]add ConsensusBasedX`. It is licensed under the MIT license. More examples and full instructions are available in the [documentation](https://pdips.github.io/ConsensusBasedX.jl/).
 
