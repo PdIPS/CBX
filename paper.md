@@ -134,13 +134,13 @@ Ultimately, a low-level interface (including documentation and full-code example
 
 ![CBXPy logo.](CBXPy.png){ width=50% }
 
-Most of the [CBXPy](https://pdips.github.io/CBXpy/) implementation uses basic Python functionality, and the agents are handled as an array-like structure. For certain specific features, like broadcasting-behaviour, array copying, and index selection, we fall back to the `numpy` implementation [@harris2020array]. However, it should be noted that an adaptation to other array or tensor libraries like PyTorch [@paszke2019pytorch] is straightforward. Compatibility with the latter enables gradient-free deep learning directly on the GPU, as demonstrated in the documentation.
+Most of the [CBXPy](https://pdips.github.io/CBXpy/) implementation uses basic Python functionality, and the agents are handled as an array-like structure. For certain specific features, like broadcasting-behaviour, array copying, and index selection, we fall back to the `numpy` implementation [@harris2020array]. However, it should be noted that an adaptation to other array or tensor libraries like PyTorch [@paszke2019pytorch] is straightforward. Compatibility with the latter enables gradient-free deep learning directly on the GPU, as demonstrated in the documentation.\
 
-The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via `pip`. It is licensed under the MIT license. Below, we provide a short example on how to optimize a function with CBXPy.
+The library is available on [GitHub](https://github.com/pdips/CBXpy) and can be installed via `pip`. It is licensed under the MIT license. Below, we provide a short example on how to optimise a function with CBXPy.
 
 ```Python
   from cbx.dynamics import CBO        # import the CBO class
-  f = lambda x: x[0]**2 + x[1]**2     # define the function to minimize
+  f = lambda x: x[0]**2 + x[1]**2     # define the function to minimise
   x = CBO(f, d=2).optimize()          # run the optimisation
 ```
 
@@ -152,7 +152,13 @@ More examples and details on the implementation are available in the [documentat
 
 [ConsensusBasedX.jl](https://pdips.github.io/ConsensusBasedX.jl/) has been almost entirely written in native Julia (with the exception of a single call to LAPACK). The code has been developed with performance in mind, thus the critical routines are fully type-stable and allocation-free. A specific tool is provided to benchmark a typical method iteration, which can be used to detect allocations. Through this tool, unit tests are in place to ensure zero allocations in all the provided methods. The benchmarking tool is also available to users, who can use it to test their implementations of $f$, as well as any new CBX methods.
 
-The library is available on [GitHub](https://github.com/PdIPS/ConsensusBasedX.jl). It has been registered in the [general Julia registry](https://github.com/JuliaRegistries/General), and therefore it can be installed by running `]add ConsensusBasedX`. It is licensed under the MIT license. The [documentation](https://pdips.github.io/ConsensusBasedX.jl/) is available online.
+Basic function minimisation can be performed by running:
+```julia
+  using ConsensusBasedX               # load the ConsensusBasedX package
+  f(x) = x[1]^2 + x[2]^2              # define the function to minimise
+  x = minimise(f, D = 2)              # run the minimisation
+```
+The library is available on [GitHub](https://github.com/PdIPS/ConsensusBasedX.jl). It has been registered in the [general Julia registry](https://github.com/JuliaRegistries/General), and therefore it can be installed by running `]add ConsensusBasedX`. It is licensed under the MIT license. More examples and full instructions are available in the [documentation](https://pdips.github.io/ConsensusBasedX.jl/).
 
 # Acknowledgements
 
