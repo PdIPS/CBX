@@ -1,0 +1,3 @@
+[submodule "CBXPy"]
+	path = CBXPy
+	url = git@github.com:PdIPS/CBXpy.git
