@@ -1,3 +1,6 @@
 [submodule "CBXPy"]
 	path = CBXPy
 	url = git@github.com:PdIPS/CBXpy.git
+[submodule "ConsensusBasedX"]
+	path = ConsensusBasedX
+	url = git@github.com:PdIPS/ConsensusBasedX.jl.git
