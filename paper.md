@@ -38,7 +38,7 @@ affiliations:
     index: 4
   - name: Munich Center for Machine Learning, Germany
     index: 5
-  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Hamburg, Germany
+  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
     index: 6
   - name: University of Wuppertal, Germany
     index: 7
