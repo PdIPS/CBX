@@ -38,13 +38,13 @@ affiliations:
     index: 4
   - name: Munich Center for Machine Learning, Germany
     index: 5
-  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Notkestr. 85, 22607 Hamburg, Germany
+  - name: Helmholtz Imaging, Deutsches Elektronen-Synchrotron DESY, Hamburg, Germany
     index: 6
   - name: University of Wuppertal, Germany
     index: 7
   - name: MATHERIALS team, Inria Paris, France
     index: 8
-  - name: École des Ponts, France
+  - name: École des Ponts ParisTech, Marne-la-Vallée, France
     index: 9
 date: 22 March, 2024
 bibliography: paper.bib
